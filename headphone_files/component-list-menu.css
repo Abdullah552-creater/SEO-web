@@ -1,0 +1,31 @@
+.list-menu--right {
+  right: 0;
+}
+
+.list-menu--disclosure {
+  position: absolute;
+  min-width: 100%;
+  width: 30rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+}
+
+.list-menu--disclosure:focus {
+  outline: none;
+}
+
+.list-menu__item--active {
+  font-weight: var(--font-tofino-weight-semibold);
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--brand-earpad-yellow));
+}
+
+.list-menu__item--active:hover {
+  text-decoration-thickness: 0.2rem;
+}
+
+.list-menu--disclosure.localization-selector {
+  max-height: 18rem;
+  overflow: auto;
+  width: 10rem;
+  padding: 0.5rem;
+}

@@ -1,0 +1,62 @@
+/** Shopify CDN: Minification failed
+
+Line 10:0 Transforming class syntax to the configured target environment ("es5") is not supported yet
+Line 11:15 Transforming object literal extensions to the configured target environment ("es5") is not supported yet
+Line 35:12 Transforming object literal extensions to the configured target environment ("es5") is not supported yet
+Line 50:14 Transforming object literal extensions to the configured target environment ("es5") is not supported yet
+Line 56:9 Transforming object literal extensions to the configured target environment ("es5") is not supported yet
+
+**/
+class HeaderMenu extends HTMLElement {
+    constructor() {
+      super();
+      this.mainDetailsToggle = this.querySelector('details');
+      this.content = this.mainDetailsToggle.querySelector('[data-menu-content]');
+      this.trigger = this.mainDetailsToggle.querySelector('summary');
+
+      this.header = document.querySelector('.header-wrapper');
+
+      this.mainDetailsToggle.addEventListener('focusout', this.onFocusOut.bind(this));
+
+      this.mainDetailsToggle.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'touch') {
+          return;
+        }
+        this.onToggle();
+      });
+      this.mainDetailsToggle.addEventListener('pointerleave', (event) => {
+        if (event.pointerType === 'touch') {
+          return;
+        }
+        this.close();
+      });
+    }
+  
+    onToggle() {
+      if (!this.header) return;
+
+      if (!this.animations) this.animations = this.content.getAnimations();
+  
+      if (this.mainDetailsToggle.hasAttribute('open')) {
+        this.animations.forEach(animation => animation.play());
+      } else {
+        this.animations.forEach(animation => animation.cancel());
+      }
+
+      this.header.preventHide = this.mainDetailsToggle.open;
+      this.mainDetailsToggle.setAttribute('open', true);
+    }
+
+    onFocusOut() {
+      setTimeout(() => {
+        if (!this.contains(document.activeElement)) this.close();
+      })
+    }
+  
+    close() {
+      this.mainDetailsToggle.removeAttribute('open');
+      this.mainDetailsToggle.querySelector('summary').setAttribute('aria-expanded', false);
+    }
+  }
+  
+customElements.define('header-menu', HeaderMenu);
