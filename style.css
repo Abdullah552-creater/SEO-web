@@ -304,7 +304,9 @@ footer {
     height: 100vh;
 }
 
-
+footer .container{
+    padding-top: 30px;
+}
 
 
 footer .container .row .logo h3{
